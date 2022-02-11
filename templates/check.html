@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='my_script.js') }}"></script>
+    <!---<img src="{{ url_for('static', filename='my_img.png') }}"> --->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schuman check - x and y coordinates build a grid</title>
+</head>
+<body>
+    <h1>Hello, from the checker program in check.html</h1>
+
+    {% if xCoord > 10 %}
+        {% set xCoord = 10 %}
+        {% if xCoord < 1 %}
+            {% set xCoord = 1 %}
+        {% endif %}
+    {% endif %}
+
+    {% if yCoord > 10 %}
+        {% set yCoord = 10 %}
+        {% if yCoord < 1 %}
+            {% set yCoord = 1 %}
+        {% endif %}
+    {% endif %}
+
+    <p>x Coord: {{ xCoord }}</p>
+    <p>y Coord: {{ yCoord }}</p>
+
+    <!--- the evens and the odds are alternating colors, by adding x+y coordinates--->
+    <div class="container">
+    {% for y in range (yCoord): %}
+        <div class="row" >
+        {% for x in range (xCoord): %}
+            {% if ((x+y)%2) == 0 %}
+                <div class="box" style="background-color: white"></div>
+            {% else %}
+                <div class="box" style="background-color: blue"></div>
+            {% endif %}
+        {% endfor %}
+        </div> 
+    {% endfor %}
+    </div>
+</body>
+</html>
